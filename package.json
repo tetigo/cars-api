@@ -1,0 +1,23 @@
+{
+  "name": "ykron",
+  "version": "1.0.0",
+  "description": "An API for delivering cars info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ykron",
+    "API",
+    "carros"
+  ],
+  "author": "Tiago Mendes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tetigo/cars-api.git"
+  }
+}
