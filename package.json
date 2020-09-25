@@ -4,7 +4,8 @@
   "description": "An API for delivering cars info",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "keywords": [
     "ykron",
@@ -14,10 +15,14 @@
   "author": "Tiago Mendes",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tetigo/cars-api.git"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
