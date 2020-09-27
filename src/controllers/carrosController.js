@@ -1,14 +1,10 @@
-const mongoose = require('mongoose')
-
-const Carros = require('../models/carros')
-const { Mongoose } = require('mongoose')
+const carrosDB = require('../models/carros')
 
 const getCarros = async (req, res) => {
     const limit = parseInt(req.query.limit)
     try {
         let carros = {}
-        if (limit) carros = await Carros.find({}).limit(limit)
-        else carros = await Carros.find({})
+        carros = await carrosDB.getCarros(limit)
         return res.send(carros)
     } catch (err) {
         return res.status(500).send({ error: 'Erro na consulta de carros ' + err })
@@ -18,7 +14,7 @@ const getCarros = async (req, res) => {
 const getCarrosById = async (req, res) => {
     try {
         const id = req.params.id
-        const carros = await Carros.findOne({ "_id": Object(id) })
+        let carros = carrosDB.getCarrosById(id)
         return res.send(carros)
     } catch (err) {
         return res.status(500).send({ error: 'Erro na consulta de carros ' + err })
@@ -30,44 +26,53 @@ const getCarrosByQuery = async (req, res) => {
     const { veiculo, marca, ano, descricao, cod_fipe, vendido } = req.query
 
     let carros = []
+    try {
+        if (veiculo) {
+            console.log('veiculo')
+            const veiculo2 = new RegExp(veiculo, 'i')
+            const obj = { "veiculo": veiculo2 }
+            const p1 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p1)
+        }
+        if (marca) {
+            console.log('marca')
+            const marca2 = new RegExp(marca, 'i')
+            const obj = { "marca": marca2 }
+            const p2 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p2)
+        }
+        if (ano) {
+            console.log('ano')
+            const ano2 = parseInt(ano)
+            const obj = { "ano": ano2 }
+            const p3 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p3)
+        }
+        if (descricao) {
+            console.log('descricao')
+            const descricao2 = new RegExp(descricao, 'i')
+            const obj = { "descricao": descricao2 }
+            const p4 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p4)
+        }
+        if (cod_fipe) {
+            console.log('cod_fipe')
+            const cod_fipe2 = new RegExp(cod_fipe, 'i')
+            const obj = { "cod_fipe": cod_fipe2 }
+            const p5 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p5)
+        }
+        if (vendido) {
+            console.log('vendido')
+            const obj = { "vendido": true }
+            const p6 = await carrosDB.getCarrosByQuery(obj)
+            carros.push(...p6)
+        }
+        return res.send({ carros })
 
-    if (veiculo) {
-        console.log('veiculo')
-        const veiculo2 = new RegExp(veiculo, 'i')
-        const p1 = await Carros.find({ "veiculo": veiculo2 })
-        carros.push(...p1)
+    } catch (err) {
+        return res.status(500).send({ error: 'Erro na consulta de carros ' + err })
     }
-    if (marca) {
-        console.log('marca')
-        const marca2 = new RegExp(marca, 'i')
-        const p2 = await Carros.find({ "marca": marca2 })
-        carros.push(...p2)
-    }
-    if (ano) {
-        console.log('ano')
-        const ano2 = parseInt(ano)
-        const p3 = await Carros.find({ "ano": ano2 })
-        carros.push(...p3)
-    }
-    if (descricao) {
-        console.log('descricao')
-        const descricao2 = new RegExp(descricao, 'i')
-        const p4 = await Carros.find({ "descricao": descricao2 })
-        carros.push(...p4)
-    }
-    if (cod_fipe) {
-        console.log('cod_fipe')
-        const cod_fipe2 = new RegExp(cod_fipe, 'i')
-        const p5 = await Carros.find({ "cod_fipe": cod_fipe2 })
-        carros.push(...p5)
-    }
-    if (vendido) {
-        // const vendido2 = new RegExp(vendido)
-        console.log('vendido')
-        const p6 = await Carros.find({ "vendido": true })
-        carros.push(...p6)
-    }
-    return res.send({ carros })
 }
 
 const postCarros = async (req, res) => {
@@ -79,35 +84,34 @@ const postCarros = async (req, res) => {
         cod_fipe: req.body.cod_fipe,
         vendido: req.body.vendido
     }
-    let carro = new Carros(item)
-    carro.save()
-    return res.json(carro)
+    let carro = carrosDB.newCarro(item)
+    carro
+        .then(result=>res.json(result))
+        .catch(err=>res.send(err))
 }
 
 const patchCarros = async (req, res) => {
     let id = req.params.id
     let updateObject = req.body
-    await Carros.updateOne({ _id: new mongoose.Types.ObjectId(id) }, { $set: updateObject }, (err, result) => {
-        if (err) return res.status(500).send(err);
-        else return res.json(result)
-    })
+    carrosDB.patchCarro(id, updateObject)
+        .then((result)=>res.json(result))
+        .catch((err)=>res.status(500).send(err))
 }
 
 const putCarros = async (req, res) => {
     let id = req.params.id
     let updateObject = req.body
-    await Carros.findByIdAndUpdate({ _id: new mongoose.Types.ObjectId(id) }, { $set: updateObject }, {useFindAndModify: false}, (err, result) => {
-        if (err) return res.status(500).send(err);
-        else return res.json(result)
-    })
+    carrosDB.putCarro(id, updateObject)
+        .then((result)=>res.json(result))
+        .catch((err)=>res.status(500).send(err))
 }
 
 const deleteCarros = async (req, res) => {
     let id = req.params.id
-    await Carros.deleteOne({ _id: new mongoose.Types.ObjectId(id) }, {useFindAndModify: false}, (err, result) => {
-        if (err) return res.status(500).send(err);
-        else return res.json(result)
-    })
+
+    carrosDB.deleteCarro(id)
+    .then((result)=>res.json(result))
+    .catch((err)=>res.status(500).send(err))
 }
 
 module.exports = {

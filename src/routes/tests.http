@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3333/veiculos/5f70d741e29fd4749819e742
+DELETE http://localhost:3333/veiculos/5f70eb1f5ab8b488308ee9d7
 
 ###
 
@@ -20,23 +20,23 @@ GET http://localhost:3333/veiculos/find?cod_fipe=123456-7
 
 ###
 
-PATCH http://localhost:3333/veiculos/5f70c08956e56d5a7873f767
+PATCH http://localhost:3333/veiculos/5f70eb1f5ab8b488308ee9d7
 Content-Type: application/json
 
 {
     "marca": "AUDI_NEW",
-    "ano": 2021
+    "ano": 2022
 }
 
 ###
 
-PUT http://localhost:3333/veiculos/5f70c08956e56d5a7873f767
+PUT http://localhost:3333/veiculos/5f70eb1f5ab8b488308ee9d7
 Content-Type: application/json
 
 {
     "veiculo": "Q4",
     "marca": "AUDI_NEW",
-    "ano": 2021,
+    "ano": 2022,
     "vendido": false
 }
 
