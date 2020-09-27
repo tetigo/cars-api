@@ -1,0 +1,66 @@
+
+POST http://localhost:3333/veiculos
+Content-Type: application/json
+
+{
+    "veiculo": "Q55",
+    "marca": "Audi",
+    "ano": 2020,
+    "cod_fipe": "123456-7",
+    "vendido": true
+}
+
+###
+
+DELETE http://localhost:3333/veiculos/5f70d741e29fd4749819e742
+
+###
+
+GET http://localhost:3333/veiculos/find?cod_fipe=123456-7
+
+###
+
+PATCH http://localhost:3333/veiculos/5f70c08956e56d5a7873f767
+Content-Type: application/json
+
+{
+    "marca": "AUDI_NEW",
+    "ano": 2021
+}
+
+###
+
+PUT http://localhost:3333/veiculos/5f70c08956e56d5a7873f767
+Content-Type: application/json
+
+{
+    "veiculo": "Q4",
+    "marca": "AUDI_NEW",
+    "ano": 2021,
+    "vendido": false
+}
+
+###
+
+GET http://localhost:3333/veiculos/find?veiculo=Legend&marca=Agrale
+
+###
+
+GET http://localhost:3333/veiculos/find?vendido=true
+
+###
+
+GET http://localhost:3333/veiculos/5f6f8cfb58140753a3508321
+
+###
+
+GET http://localhost:3333/veiculos?limit=10
+
+###
+
+GET http://localhost:3333/veiculos
+
+###
+
+
+
