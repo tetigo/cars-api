@@ -4,7 +4,7 @@
   "description": "An API for delivering cars info",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "node test.js",
     "start": "nodemon index.js"
   },
   "keywords": [

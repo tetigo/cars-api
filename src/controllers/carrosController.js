@@ -14,7 +14,7 @@ const getCarros = async (req, res) => {
 const getCarrosById = async (req, res) => {
     try {
         const id = req.params.id
-        let carros = carrosDB.getCarrosById(id)
+        let carros = await carrosDB.getCarrosById(id)
         return res.send(carros)
     } catch (err) {
         return res.status(500).send({ error: 'Erro na consulta de carros ' + err })
