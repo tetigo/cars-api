@@ -1,12 +1,12 @@
 ### Ykron - Projeto Carros
 
-instalar MongoDB: [https://www.mongodb.com/dr/fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.1-signed.msi/download](https://www.mongodb.com/dr/fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.1-signed.msi/download) 
+instalar MongoDB: [mongodb-windows-x86_64-4.4.1-signed.msi](https://www.mongodb.com/dr/fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.1-signed.msi/download) 
 
-instalar Studio 3T : [https://studio3t.com/download-thank-you/?OS=win64](https://studio3t.com/download-thank-you/?OS=win64)
+instalar Studio 3T : [Studio3T-win64](https://studio3t.com/download-thank-you/?OS=win64)
 
 importar os dados para dentro do mongodb: `data.json`
 
-Para importar vamos usar o Studio 3T seguindo esse tutorial: [https://studio3t.com/knowledge-base/articles/mongodb-import-json-csv-bson/#:~:text=always%20be%20overridden.-,Import%20JSON%20to%20MongoDB,source%20document%2C%20Rainfall%2DData.](Tutorial)
+Para importar vamos usar o Studio 3T seguindo esse tutorial: [Tutorial](https://studio3t.com/knowledge-base/articles/mongodb-import-json-csv-bson/#:~:text=always%20be%20overridden.-,Import%20JSON%20to%20MongoDB,source%20document%2C%20Rainfall%2DData.)
 
 criar diretorio para rodar projeto: `mkdir diretorio`
 
